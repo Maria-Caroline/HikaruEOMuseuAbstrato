@@ -7,12 +7,10 @@ class Overworld {
     }
 
     init(){
-        const image = new image(); //cria uma imagem
+        const image = new Image(); 
         image.onload = () => {
-            //this.ctx.drawImage(image,0,0)
-            //copia os pixels no browser
+            this.ctx.drawImage(image,0,0)
         }
-        //images.src="/images/maps/museum.png"; 
-        //pega o src da imagem
+        image.src="images/map/map.png"; 
     }
 }
