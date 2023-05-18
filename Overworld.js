@@ -6,11 +6,33 @@ class Overworld {
 
     }
 
-    init(){
-        const image = new Image(); 
-        image.onload = () => {
-            this.ctx.drawImage(image,0,0)
+    startGameLoop(){
+        const step = () => {
+
+            this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height);
+
+            this.map.drawMap(this.ctx);
+
+            Object.values(this.map.gameObjects).forEach(object =>{
+                object.update({
+                    arrow: this.directionInput.direction
+                })
+                object.sprite.draw(this.ctx);
+            })
+
+            requestAnimationFrame(() => {
+                step();
+            } )
         }
-        image.src="images/map/map.png"; 
+        step();
+    }
+
+    init(){
+        this.map = new OverworldMaps(window.OverworldMaps.mainRoom);
+        this.directionInput = new DirectionInput();
+        this.directionInput.init();
+
+        this.startGameLoop();
+        
     }
 }
