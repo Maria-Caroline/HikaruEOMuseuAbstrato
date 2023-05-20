@@ -1,44 +1,58 @@
 class Person extends GameObject{
-    constructor(config) {
-        super(config);
-        this.movingProgressRemaining = 0;
+  constructor(config) {
+      super(config);
+      this.movingProgressRemaining = 0;
 
-        this.isPlayerControlled = config.isPlayerControlled || false;
-        this.directionUpdate = {
-          "up": ["y", -3],
-          "down": ["y", 3],
-          "left": ["x", -3],
-          "right": ["x", 3
-        ],
-        }
+      this.isPlayerControlled = config.isPlayerControlled || false;
+
+      this.directionUpdate = {
+        "up": ["y", -3],
+        "down": ["y", 3],
+        "left": ["x", -3],
+        "right": ["x", 3],
+      }
+  }
+
+  update(state) {
+    if (this.movingProgressRemaining > 0) {
+      this.updatePosition();
+    } else {
+      if (this.isPlayerControlled && state.arrow) {
+        this.startBehavior(state, {
+          type: "walk",
+          direction: state.arrow
+        })
+      }
+      this.updateSprite(state);
     }
+  }
 
-    update(state) {
-        this.updatePosition();
-        this.updateSprite(state);
+  startBehavior(state, behavior) {
+    this.direction = behavior.direction;
     
-        if (this.isPlayerControlled && this.movingProgressRemaining === 0 && state.arrow) {
-          this.direction = state.arrow;
-          this.movingProgressRemaining = 16;
-        }
-      }
-    
-      updatePosition() {
-        if (this.movingProgressRemaining > 0) {
-          const [property, change] = this.directionUpdate[this.direction];
-          this[property] += change;
-          this.movingProgressRemaining -= 1;
-        }
-      }
+    if (behavior.type === "walk") {
 
-      updateSprite(state){
-        if (this.isPlayerControlled && this.movingProgressRemaining === 0 && !state.arrow) {
-          this.sprite.setAnimation("idle-"+this.direction);
-          return;
-        }
-          if(this.movingProgressRemaining > 0){
-            this.sprite.setAnimation("walk-"+this.direction);
-          }
+      if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
+        return;
       }
-    
+      state.map.moveWall(this.x, this.y, this.direction);
+      this.movingProgressRemaining = 57;
     }
+  }
+
+  updatePosition() {
+      const [property, change] = this.directionUpdate[this.direction];
+      this[property] += change;
+      this.movingProgressRemaining -= 3;
+  }
+
+  updateSprite() {
+    if (this.movingProgressRemaining > 0) {
+      this.sprite.setAnimation("walk-"+this.direction);
+      return;
+    }
+    this.sprite.setAnimation("idle-"+this.direction);    
+  }
+  
+}
+
