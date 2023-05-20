@@ -34,14 +34,34 @@ class Overworld {
         step();
     }
 
-    init(){
-        this.map = new OverworldMap(window.OverworldMaps.mainRoom);
+      bindHeroPositionCheck() {
+        document.addEventListener("PersonWalkingComplete", e => {
+          if (e.detail.whoId === "hero") {
+            //Hero's position has changed
+            this.map.checkForFootstepCutscene()
+          }
+        })
+      }
+
+      startMap(mapConfig) {
+        this.map = new OverworldMap(mapConfig);
+        this.map.overworld = this;
         this.map.mountObjects();
+       }
+
+    init(){
+        this.startMap(window.OverworldMaps.mainRoom);
+        
+        this.bindHeroPositionCheck();
+        this.map.mountObjects();
+
 
         this.directionInput = new DirectionInput();
         this.directionInput.init();
 
         this.startGameLoop();
-        
+        this.map.startCutscene([
+            {type:"textMessage", text: "hiiiiii"}
+        ])
     }
 }

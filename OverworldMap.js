@@ -1,9 +1,12 @@
 class OverworldMap {
     constructor(config){
         this.gameObjects = config.gameObjects;
+        this.cutsceneSpaces = config.cutsceneSpaces || {};
         this.walls = config.walls || {};
         this.map = new Image();
         this.map.src = config.mapSrc;
+
+        this.isCutscenePlaying = false;
     }
 
     drawMap(ctx, cameraPerson) {
@@ -20,10 +23,35 @@ class OverworldMap {
       }
     
       mountObjects() {
-        Object.values(this.gameObjects).forEach(o => {
-          o.mount(this);
+        Object.keys(this.gameObjects).forEach(key => {
+            let object = this.gameObjects[key];
+            object.id = key;
+            object.mount(this);
     
         })
+      }
+
+      async startCutscene(events){
+        this.isCutscenePlaying= true;
+
+        for(let i= 0;i<events.length; i++ ){
+          const eventHandler = new OverworldEvent({
+            event: events[i],
+            map: this,
+          })
+          await eventHandler.init();
+        }
+        this.isCutscenePlaying = false;
+
+        Object.values(this.gameObjects).forEach(object => object.doBehaviorEvent(this))
+      }
+    
+      checkForFootstepCutscene() {
+        const hero = this.gameObjects["hero"];
+        const match = this.cutsceneSpaces[ `${hero.x},${hero.y}` ];
+        if (!this.isCutscenePlaying && match) {
+          this.startCutscene( match[0].events )
+        }
       }
 
       addWall(x,y) {
@@ -100,6 +128,50 @@ window.OverworldMaps = {
           [utils.asGridCoord(11,4)] : true,
           [utils.asGridCoord(11,3)] : true,
           [utils.asGridCoord(11,7)] : true,
+        },
+        cutsceneSpaces:{
+          [utils.asGridCoord(3,3)] : [
+          {
+            events: [
+              {type:"textMessage", text: "Obra composicaoAmareloAzulVermelho = \n new Quadro ('Composicao em Amarelo, Azul e Vermelho', 'Piet Mondrian', 1930, 'Óleo sobre tela')"},
+            ]
+          }
+          ],
+          [utils.asGridCoord(2,3)] : [
+            {
+              events: [
+                {type:"textMessage", text: "Esse é um quadro, ele não é legal?"},
+              ]
+            }
+            ],
+            [utils.asGridCoord(7,3)] : [
+              {
+                events: [
+                  {type:"textMessage", text: "Esse é um quadro, ele não é legal?"},
+                ]
+              }
+              ],
+              [utils.asGridCoord(10,3)] : [
+                {
+                  events: [
+                    {type:"textMessage", text: "Quadro numero5 = new Quadro ('n° 5', 'Jackson Pollock', 1948, 'Oleo sobre cartão de fibra'"},
+                  ]
+                }
+                ],
+                [utils.asGridCoord(4,5)] : [
+                  {
+                    events: [
+                      {type:"textMessage", text: "Você observa a escultura... ela é engraçada"},
+                    ]
+                  }
+                  ],
+                  [utils.asGridCoord(6,6)] : [
+                    {
+                      events: [
+                        {type:"textMessage", text: "Obra balloonDog = new Escultura ('Balloon Dog', 'Jeff Koons', 1994, 'Porcelana'"},
+                      ]
+                    }
+                    ]
         }
     }
 }
