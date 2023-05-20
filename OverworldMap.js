@@ -133,42 +133,43 @@ window.OverworldMaps = {
           [utils.asGridCoord(3,3)] : [
           {
             events: [
-              {type:"textMessage", text: "Obra composicaoAmareloAzulVermelho = \n new Quadro ('Composicao em Amarelo, Azul e Vermelho', 'Piet Mondrian', 1930, 'Óleo sobre tela')"},
+              //você observa a obra... ela é interessante
+              {type:"textMessage", text: "Esse é um quadro, ele não é legal?"},
             ]
           }
           ],
           [utils.asGridCoord(2,3)] : [
             {
               events: [
-                {type:"textMessage", text: "Esse é um quadro, ele não é legal?"},
+                {type:"textMessage", text: "Você observa a obra... ela é interessante"},
               ]
             }
             ],
             [utils.asGridCoord(7,3)] : [
               {
                 events: [
-                  {type:"textMessage", text: "Esse é um quadro, ele não é legal?"},
+                  {type:"textMessage", text: "Você observa a obra... ela é interessante"},
                 ]
               }
               ],
               [utils.asGridCoord(10,3)] : [
                 {
                   events: [
-                    {type:"textMessage", text: "Quadro numero5 = new Quadro ('n° 5', 'Jackson Pollock', 1948, 'Oleo sobre cartão de fibra'"},
+                    {type:"textMessage", text: "Esse é um quadro, ele não é legal?"},
                   ]
                 }
                 ],
-                [utils.asGridCoord(4,5)] : [
+                [utils.asGridCoord(5,6)] : [
                   {
                     events: [
-                      {type:"textMessage", text: "Você observa a escultura... ela é engraçada"},
+                      {type:"textMessage", text: "Você observa a obra... ela é interessante"},
                     ]
                   }
                   ],
                   [utils.asGridCoord(6,6)] : [
                     {
                       events: [
-                        {type:"textMessage", text: "Obra balloonDog = new Escultura ('Balloon Dog', 'Jeff Koons', 1994, 'Porcelana'"},
+                        {type:"textMessage", text: "Você observa a escultura... ela é engraçada"},
                       ]
                     }
                     ]

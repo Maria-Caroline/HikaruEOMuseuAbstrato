@@ -61,7 +61,7 @@ class Overworld {
 
         this.startGameLoop();
         this.map.startCutscene([
-            {type:"textMessage", text: "hiiiiii"}
+            {type:"textMessage", text: "Explore com Hikaru o Museu Abstrato e entenda o conteúdo!"}
         ])
     }
 }

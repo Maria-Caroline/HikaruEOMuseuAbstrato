@@ -2,17 +2,11 @@
     --border-color: #984e5e;
     --dialog-background: #87b8bd;
 
-    --menu-background: #b99389;
+    --menu-background: #ddc2b4;
     --menu-border-color: #ad6a6c;
     --menu-font-color: #5c5e64;
     --menu-selected-background: #ae502e;
-
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-
-
-
-
-
 }
 
 *{
@@ -33,6 +27,24 @@ body{
     margin-top: 20px;
 }
 
+.code-container1{
+    position:absolute;
+    left: 15px;
+    top:20px;
+}
+.main{
+    width:250px;
+    image-rendering: pixelated;
+}
+.code-container2{
+    position:absolute;
+    right: 10px;
+    top:20px;
+}
+.obra{
+    width:270px;
+    image-rendering: pixelated;
+}
 .game-container canvas{
     image-rendering: pixelated;
 }

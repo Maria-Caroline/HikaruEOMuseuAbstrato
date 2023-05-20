@@ -10,9 +10,14 @@ class TextMessage{
         this.element.classList.add("TextMessage");
 
         this.element.innerHTML = (`
-            <p class= "TextMessage_p">${this.text}</p>
-            <button class= "TextMessage_button">Next</button>
+            <p class= "TextMessage_p"></p>
+            <button class= "TextMessage_button">Continuar</button>
         `)
+
+        this.reveaingText = new RevealingText({
+            element: this.element.querySelector(".TextMessage_p"),
+            text: this.text
+        })
 
         this.element.querySelector("button").addEventListener("click", () => {
             this.done();
@@ -32,6 +37,7 @@ class TextMessage{
 
     init(container){
         this.createElement();
-        container.appendChild(this.element)
+        container.appendChild(this.element);
+        this.reveaingText.init();
     }
 }

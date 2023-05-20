@@ -6,12 +6,13 @@
     height: 150px;
     padding: 4px;
     background: var(--menu-background);
-    border-top: 2px solid var(--menu-background);
+    border: 3px solid var(--menu-selected-background);
+    border-style: dashed;
     color: var(--menu-font-color);
 }
 
 .TextMessage_p{
-    margin: 0;
+    margin: 2%;
     font-size: 25px;
 }
 
@@ -25,10 +26,15 @@
 
 .TextMessage_button{
     margin: 0;
-    font-size: 30px;
+    font-size: 23px;
+    height: 50px;
     font-family: inherit;
     cursor: pointer;
     position: absolute;
-    right: 2px;
-    bottom: 0;
+    right: 5px;
+    color: white;
+    bottom: 5px;
+    border: none;
+    border-radius: 5px;
+    background: var(--dialog-background);
 }
