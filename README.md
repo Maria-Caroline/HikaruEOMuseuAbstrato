@@ -1,4 +1,4 @@
-## Sobre
+# Sobre o Projeto!
 Este micro jogo foi feito para uma apresentação sobre o conceito de Abstração em Java, para o curso técnico que realizei (Sistemas da Informação). 
 
 No jogo o personagem controlado (Hikaru) está passeando por um museu, ele interage com os quadros e a escultura, ambas são um Extends de Obra. Com este auxílio visual, foi mais fácil de exemplificar para a turma a Abstração.
